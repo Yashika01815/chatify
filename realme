@@ -1,0 +1,15 @@
+first creat frontend and backend folder in the project folder and download vite in frontend folder then move to backend folder and start working on backend first.
+download node(npm init) and eexpress,mongoose,dotenv jsonwebtoken bcrptjs cookie parser cloudinary socket.io
+Breakdown of Packages:
+express: Web framework for Node.js
+mongoose: MongoDB ODM (Object Data Modeling)
+dotenv: Loads environment variables from a .env file
+jsonwebtoken: For generating and verifying JWT tokens
+bcryptjs: For hashing and comparing passwords
+cookie-parser: For parsing cookies
+cloudinary: For uploading and managing media on Cloudinary
+socket.io: For real-time, bi-directional communication
+
+since the frontend folder has src folder and all the working files like index.js are into it so we will also create a src folder in the backend and put index.js and all the folders like mvc in it and also we will use module like import express from 'express' not const express because in frontend vite is using the import(firstly in package.json write type as module instead of commonjs)
+
+when a file exports something using export default, you can import it using any name you like. For example, in your auth.route.js file, if you're exporting the router with export default router;, then in your index.js, you can import it using any identifier, such as import authRoutes from './routes/auth.route.js';, or even import abc from './routes/auth.route.js';. Both will work perfectly because you're importing the default export, and JavaScript allows you to rename default imports as you wish. However, it’s a good practice to use meaningful names like authRoutes to make the code more readable and understandable. 
