@@ -12,6 +12,10 @@ const PORT = process.env.PORT
 
 app.use(express.json()); // Middleware to parse JSON request bodies
 app.use(cookieParser()); // Middleware to parse cookies
+app.use(cors({
+    origin: "http://localhost:5001", // Allow requests from this origin (frontend)
+    credentials: true, // Allow credentials (cookies) to be sent
+})); // Middleware to enable CORS
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
