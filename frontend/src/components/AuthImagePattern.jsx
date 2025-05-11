@@ -1,19 +1,19 @@
+import chatImage from './image.png'; // adjust the path as needed
+
 const AuthImagePattern = ({ title, subtitle }) => {
   return (
-    <div className="hidden lg:flex items-center justify-center bg-base-200 p-12">
-      <div className="max-w-md text-center">
-        <div className="grid grid-cols-3 gap-3 mb-8">
-          {[...Array(9)].map((_, i) => (
-            <div
-              key={i}
-              className={`aspect-square rounded-2xl bg-primary/10 ${
-                i % 2 === 0 ? "animate-pulse" : ""
-              }`}
-            />
-          ))}
-        </div>
-        <h2 className="text-2xl font-bold mb-4">{title}</h2>
-        <p className="text-base-content/60">{subtitle}</p>
+    <div className="hidden lg:flex items-center justify-center h-screen bg-base-200 p-12">
+      <div className="max-w-lg text-center">
+        {/* Chat Icon */}
+        <img 
+          src={chatImage} 
+          alt="Chat Icon" 
+          className="mx-auto mb-6 w-28 h-28 object-contain" 
+        />
+        {/* Title */}
+        <h2 className="text-4xl font-extrabold mb-4">{title}</h2>
+        {/* Subtitle */}
+        <p className="text-lg text-base-content/70">{subtitle}</p>
       </div>
     </div>
   );
