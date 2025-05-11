@@ -20,6 +20,11 @@ const App = () => {
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
+   useEffect(() => {
+    // Set the theme globally on the <html> element
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);  // Trigger on theme change
+
 
   console.log({ authUser });
 
@@ -31,11 +36,11 @@ const App = () => {
     );
 
 
-
   return (
-    <div > 
+    <div> 
        <Navbar />
 
+       
     <Routes>
   <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
   <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
