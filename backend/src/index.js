@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 3000;
 const __dirname = path.resolve();
 
 // Use middleware
-app.use(express.json()); // Middleware to parse JSON request bodies
+app.use(express.json({ limit: "10mb" })); // Middleware to parse JSON request bodies
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(cookieParser()); // Middleware to parse cookies
 app.use(cors({
     origin: "http://localhost:5173", // Allow requests from this origin (frontend)
