@@ -55,14 +55,14 @@ const ChatContainer = () => {
             ref={messageEndRef}
           >
             <div className=" chat-image avatar">
-              <div className="size-10 rounded-full border">
+              <div className="w-10 h-10 rounded-full border">
                 <img
                   src={
                     message.senderId === authUser._id
                       ? authUser.profilePic || "/avatar.png"
                       : selectedUser.profilePic || "/avatar.png"
                   }
-                  alt="profile pic"
+                  alt="profile pic" className="w-full h-full object-cover"
                 />
               </div>
             </div>
