@@ -3,7 +3,7 @@
 
 Chatify is a full-stack real-time chat application that enables **1-on-1 messaging** between users with support for **text and image sharing**. Built using **React**, **Node.js**, **Express**, **MongoDB**, and **Socket.IO**, the app features secure authentication, real-time message delivery, online status tracking, and a clean, responsive user interface.
 
-
+live link - https://chatify-tub1.onrender.com
 ### 🚀 Features
 
 * 🔐 **User Authentication** (JWT-based login & registration)
