@@ -8,35 +8,30 @@ const getInitialTheme = () => {
   if (storedThemeData) {
     try {
       const parsedData = JSON.parse(storedThemeData);
-      if (parsedData.state && parsedData.state.theme) {
-        return parsedData.state.theme;
+      if (parsedData.state && parsedData.state.isDarkMode !== undefined) {
+        return parsedData.state.isDarkMode;
       }
     } catch (e) {
       console.error("Error parsing theme from localStorage:", e);
     }
   }
   
-  // Fallback to direct localStorage item if the persist format isn't found
-  const directTheme = localStorage.getItem("chat-theme");
-  if (directTheme) {
-    return directTheme;
-  }
-  
-  // Default theme if nothing is found
-  return "coffee";
+  // Detect user's preferred color scheme as fallback
+  const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  return prefersDarkMode;
 };
 
 export const useThemeStore = create(
   persist(
     (set, get) => ({
-      theme: getInitialTheme(),
-      setTheme: (theme) => {
-        set({ theme });
-        // Also directly set localStorage as a backup
-        localStorage.setItem("chat-theme", theme);
-        // Force theme application
+      isDarkMode: getInitialTheme(),
+      toggleTheme: () => {
+        const newIsDarkMode = !get().isDarkMode;
+        set({ isDarkMode: newIsDarkMode });
+        
+        // Apply theme directly
+        const theme = newIsDarkMode ? "dark" : "light";
         document.documentElement.setAttribute("data-theme", theme);
-        console.log("Theme set in store:", theme);
       },
     }),
     {
