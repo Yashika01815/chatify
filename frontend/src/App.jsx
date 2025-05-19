@@ -10,14 +10,10 @@ import { useAuthStore } from "./store/useAuthstore.js";
 import { useThemeStore } from "./store/useThemeStore";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
-import ThemeDebug from "./components/ThemeDebug";
-
-// Import theme CSS (only needed if the index.css approach doesn't work)
-// import './themeStyles.css';
 
 const App = () => {
-  const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
-  const { theme, setTheme } = useThemeStore();
+  const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+  const { isDarkMode } = useThemeStore();
   
   useEffect(() => {
     checkAuth();
@@ -25,6 +21,9 @@ const App = () => {
 
   // Apply theme whenever it changes
   useEffect(() => {
+    // Set theme based on isDarkMode
+    const theme = isDarkMode ? "dark" : "light";
+    
     // Set theme directly on multiple elements for maximum compatibility
     document.documentElement.setAttribute("data-theme", theme);
     document.body.setAttribute("data-theme", theme);
@@ -34,8 +33,6 @@ const App = () => {
     if (rootElement) {
       rootElement.setAttribute("data-theme", theme);
     }
-    
-    console.log("Theme applied:", theme);
     
     // Apply theme to any frames if they exist
     const frames = document.querySelectorAll('iframe');
@@ -48,24 +45,17 @@ const App = () => {
         // Ignore cross-origin frame errors
       }
     });
-    
-    // Force a reflow to make sure browsers apply the theme
-    document.body.style.display = 'none';
-    // This will force a reflow
-    void document.body.offsetHeight;
-    document.body.style.display = '';
-    
-  }, [theme]);
+  }, [isDarkMode]);
 
   if (isCheckingAuth && !authUser)
     return (
-      <div className="flex items-center justify-center h-screen" data-theme={theme}>
+      <div className="flex items-center justify-center h-screen">
         <Loader className="size-10 animate-spin" />
       </div>
     );
     
   return (
-    <div className="app-container min-h-screen theme-transition" data-theme={theme}>
+    <div className="app-container min-h-screen theme-transition">
       <Navbar />
       
       <Routes>
@@ -76,9 +66,6 @@ const App = () => {
         <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
       </Routes>
       <Toaster position="top-center" />
-      
-      {/* Theme Debug Component - Remove in production */}
-      <ThemeDebug />
     </div>
   );
 };
